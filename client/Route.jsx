@@ -16,6 +16,7 @@ import Candidates from './components/candidateManagement/index.jsx';
 import BulkUpload from './components/bulkupload/index.jsx';
 import MentorConnect from './components/mentorConnect/index.jsx';
 import Courses from './components/courseManagement/index.jsx';
+import Programs from './components/programManagement/index.jsx';
 import AssessmentTracker from './components/assessmentTracker/index.jsx';
 import ProgramFlow from './components/programFlow/index.jsx';
 import MyProfile from './components/myProfile/index.jsx';
@@ -79,6 +80,7 @@ ReactDOM.render(
 				<Route path="/bulkupload" component={() => <BulkUpload user={user}/>} />
 				<Route path="/mentorconnect" component={() => <MentorConnect user={user}/>} />
 				<Route path="/courses" component={Courses} />
+				<Route path="/programs" component={Programs} />	
 				<Route path="/assessmenttracker" component={AssessmentTracker} />
 				<Route path="/programflow" component={ProgramFlow} />
 				<Route path="/myprofile" component={MyProfile} />

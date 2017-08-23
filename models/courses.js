@@ -35,3 +35,24 @@ let courses = new Schema({
 });
 
 module.exports = mongoose.model('Courses', courses);
+
+// const mongoose = require('mongoose');
+// const Schema = mongoose.Schema;
+
+// mode = ['immersive', 'virtual', 'hybrid'];
+
+// const course = new Schema({
+//   name: { type: String, required: true, unique: true },
+//   shortName: { type: String },
+//   mode: { type: String, enum: mode, required: true },
+//   description: { type: String, required: true },
+//   tech: { type: [String], required: true },
+//   programs: [{
+//     programName: { type: String, required: true }
+//   }], 
+//   contentSource: { type: String },
+//   history: { type: String, default: '' },
+//   removed: { type: Boolean, default: false },
+// });
+
+// module.exports = mongoose.model('Course', course);

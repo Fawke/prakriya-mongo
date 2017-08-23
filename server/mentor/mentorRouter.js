@@ -130,6 +130,63 @@ router.post('/updatecandidateassessment', auth.canAccess(CONFIG.MENTOR), functio
   }
 });
 
+/**************************************************
+ * *******        Program Management **************
+ * *************************************************
+ */
+
+ // returns list of all programs in the database
+ router.get('/programs', auth.canAccess(CONFIG.ADMMEN), (req, res) => {
+    try {
+      mentorMongoController.getPrograms((programs) => {
+        console.log('programs', programs);
+        res.status(200).json(programs);
+      }, (err) => {
+        logger.error('error in getting programs', err);
+        res.status(500).json({error: 'Cannot get all programs from db...!'});
+      });
+    } catch (err) {
+      res.status(500).json({
+        error: 'Internal error occurred, please report...!'
+      });
+    }
+ });
+
+ // returns a single program indexed by its unique name
+ router.get('/program/:programName', auth.canAccess(CONFIG.ADMMEN), (req, res) => {
+   try{
+     const programName = req.params.programName;
+     mentorMongoController.getCourse(programName, (program) => {
+       console.log('program', program);
+       res.status(200).json(program);
+     }, (err) => {
+        logger.error('error in getting a program by its name', err);
+        res.status(500).json({error: 'Cannot get a program by its unique name...!'});
+     });
+   } catch (err) {
+     res.status(500).json({
+      error: 'Internal error occurred, please report...!'
+     });
+   }
+ });
+
+ // adds a new program to the database
+ router.post('/program', auth.canAccess(CONFIG.ADMMEN), (req, res) => {
+   try {
+      const program = req.body;
+      mentorMongoController.addProgram(program, (status) => {
+        res.status(200).json(status);
+      }, (err) => {
+        logger.error('error in adding a new program to the database', err);
+        res.status(500).json({error: 'Cannot add a new program to the database...!'});
+      });
+   } catch (err) {
+    res.status(500).json({
+      error: 'Internal error occurred, please report...!'
+    });
+   }
+ });
+
 /** **************************************************
 *******          Course Management           ********
 ****************************************************/
@@ -138,7 +195,8 @@ router.post('/updatecandidateassessment', auth.canAccess(CONFIG.MENTOR), functio
 router.get('/courses', auth.canAccess(CONFIG.ADMMEN), function (req, res) {
   try{
     mentorMongoController.getCourses(function (course) {
-      res.status(201).json(course);
+      console.log('course', course);
+      res.status(200).json(course);
     }, function (gcourseerr) {
       logger.error('error in get course', gcourseerr);
       res.status(500).json({error: 'Cannot get all courses from db...!'});

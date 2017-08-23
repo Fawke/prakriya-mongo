@@ -56,6 +56,10 @@ let basedata = {
       code: "COURSES"
     },
     {
+      name: "Programs",
+      code: "PROGRAMS"
+    },
+    {
       name: "Bulk Upload",
       code: "BULK_UPLOAD"
     },

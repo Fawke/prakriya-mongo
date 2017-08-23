@@ -166,11 +166,11 @@ export default class CourseCard extends React.Component {
           marginBottom: '20px',
           background: bgColor
         }}>
-          <CardHeader title={`${this.props.course.Name} - ${this.props.course.Mode}`} subtitle={`${history[0]} ${th.formatDate(history[1])}`} avatar={< Avatar backgroundColor = {
+          <CardHeader title={`${this.props.course.Name} - ${this.props.course.Mode}`} subtitle={`${history[0]} ${th.formatDate(history[1])}`} avatar={<Avatar backgroundColor = {
             bgIcon
           } > {
             this.props.course.Mode.charAt(0).toUpperCase()
-          } < /Avatar>}/>
+          } </Avatar>}/>
 
           <IconButton tooltip="Duration">
 						<DateIcon/>

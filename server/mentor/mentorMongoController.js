@@ -1,5 +1,6 @@
 const CandidateModel = require('../../models/candidates.js');
 const CourseModel = require('../../models/courses.js');
+const ProgramModel = require('../../models/programs.js');
 const WaveModel = require('../../models/waves.js');
 const logger = require('./../../applogger');
 
@@ -20,10 +21,38 @@ let updateCandidateAssessment = function (candidateObj, successCB, errorCB) {
 	});
 };
 
+/**************************************************
+ * ******* 		Program Management 		***********
+ * ********************************************** */
+
+// fetches all the programs in the database
+const getPrograms = function(successCb, errorCb) {
+	ProgramModel.find({}, (err, result) => {
+		if (err) errorCb(err);
+		successCb(result);
+	});
+};
+
+// fetches a single program identified by its name
+const getProgram = function(courseName, successCb, errorCb) {
+	CourseModel.find({Name: courseName}, (err, result) => {
+		if (err) errorCb(err);
+		else successCb(result);
+	});
+}
+
+const addProgram = function(programObj, successCb, errorCb) {
+	logger.info(programObj);
+	const programModelObj = new ProgramModel(programObj);
+	programModelObj.save((err, status) => {
+		if (err) errorCb(err);
+		else successCb(status);
+	});
+}
+
 /** **************************************************
 *******          Course Management           ********
 ****************************************************/
-
 
 let getCourses = function (successCB, errorCB) {
 	CourseModel.find({}, function (err, result) {
@@ -66,6 +95,7 @@ let addCourse = function (CourseObj, successCB, errorCB) {
 		successCB(status);
 	});
 };
+
 
 let deleteCourse = function (courseObj, successCB, errorCB) {
 	CourseModel.
@@ -219,6 +249,9 @@ let deleteSession = function (object, successCB, errorCB) {
 
 module.exports = {
 	updateCandidateAssessment,
+	getPrograms,
+	getProgram,
+	addProgram,
 	getCourses,
 	updateCourse,
 	deleteCourse,
